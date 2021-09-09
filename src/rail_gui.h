@@ -11,8 +11,10 @@
 #define RAIL_GUI_H
 
 #include "rail_type.h"
+#include "signal_type.h"
 #include "widgets/dropdown_type.h"
 
+extern SignalType _cur_signal_type;
 struct Window *ShowBuildRailToolbar(RailType railtype);
 void ReinitGuiAfterToggleElrail(bool disable);
 void ResetSignalVariant(int32 = 0);

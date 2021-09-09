@@ -52,7 +52,7 @@ static byte _waypoint_count = 1;             ///< Number of waypoint types
 static byte _cur_waypoint_type;              ///< Currently selected waypoint type
 static bool _convert_signal_button;          ///< convert signal button in the signal GUI pressed
 static SignalVariant _cur_signal_variant;    ///< set the signal variant (for signal GUI)
-static SignalType _cur_signal_type;          ///< set the signal type (for signal GUI)
+SignalType _cur_signal_type;                 ///< set the signal type (for signal GUI)
 
 struct RailStationGUISettings {
 	Axis orientation;                 ///< Currently selected rail station orientation
@@ -2196,7 +2196,9 @@ void InitializeRailGUI()
 	SetDefaultRailGui();
 
 	_convert_signal_button = false;
-	_cur_signal_type = SIGTYPE_PBS_ONEWAY;
+	if (_settings_client.gui.signal_gui_mode == SIGNAL_GUI_PATH && !IsInsideMM(_cur_signal_type, SIGTYPE_PBS, SIGTYPE_END)) {
+		_cur_signal_type = SIGTYPE_PBS_ONEWAY;
+	}
 	ResetSignalVariant();
 }
 
